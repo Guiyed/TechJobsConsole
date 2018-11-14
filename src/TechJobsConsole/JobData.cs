@@ -13,7 +13,23 @@ namespace TechJobsConsole
         public static List<Dictionary<string, string>> FindAll()
         {
             LoadData();
-            return AllJobs;
+            //return AllJobs;
+
+            //Trying to clone or copy a list
+
+            /*
+             * AllJobsCopy = (List < Dictionary<string, string> > )AllJobs.MemberwiseClone();
+             */
+
+            //Deep Copy of the List of dictionaries
+            List<Dictionary<string, string>> AllJobsCopy = new List<Dictionary<string, string>>();
+            foreach (Dictionary<string, string> job in AllJobs)
+            {
+                AllJobsCopy.Add(new Dictionary<string, string>(job));
+            }
+            //System.Console.WriteLine(AllJobsCopy.Equals(AllJobs));
+
+            return AllJobsCopy;
         }
 
         /*
@@ -58,7 +74,7 @@ namespace TechJobsConsole
             return jobs;
         }
 
-        //Implementing
+        
         public static List<Dictionary<string, string>> FindByValue(string value)
         {
             // load data, if not already loaded

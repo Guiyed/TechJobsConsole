@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TechJobsConsole
 {
@@ -41,6 +42,8 @@ namespace TechJobsConsole
                     else
                     {
                         List<string> results = JobData.FindAll(columnChoice);
+
+                        results.Sort();
 
                         Console.WriteLine("\n*** All " + columnChoices[columnChoice] + " Values ***");
                         foreach (string item in results)
@@ -123,9 +126,20 @@ namespace TechJobsConsole
         {
             //Console.WriteLine("printJobs is not implemented yet");
 
+            //Opcion1 para Sort a list of Dictionaries
+            someJobs.Sort(
+                (first, second) =>
+                {
+                    return first["name"].CompareTo(second["name"]);
+                }
+                );
+            // Opcion 2 para sort a list of Dictionaries
+            //var sortedList = (from entry in someJobs orderby entry["name"] select entry);
+
             if (someJobs.Count > 0)
             {
                 foreach (Dictionary<string, string> job in someJobs)
+                //foreach(Dictionary<string, string> job in sortedList)
                 {
                     Console.WriteLine("\n*****");
                     foreach (KeyValuePair<string, string> attribute in job)
